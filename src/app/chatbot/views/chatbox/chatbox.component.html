@@ -1,0 +1,10 @@
+<div class="message-container">
+    <div class="message-box" #chatbox [scrollTop]="chatbox.scrollHeight">
+        @for (message of messages; track $index) {
+            <app-message-card [message]="message" [ngClass]="message.role === 'user' ? 'user' : 'bot'"></app-message-card>
+        }
+    </div> 
+    <app-input-field (userInputEvent)="sendNewMessage($event)"></app-input-field>
+</div>
+
+
