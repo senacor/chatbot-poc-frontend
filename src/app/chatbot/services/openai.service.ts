@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class OpenaiService {
 
+  readonly backendURL = process.env['BACKEND_SERVICE_URL'] || "http://localhost:3000";
 
   constructor(private readonly httpClient: HttpClient) { }
-
+  
   sendMessage(message:Message):Observable<Message> {
     return this.httpClient.post<Message>(
-      'http://localhost:3000/sendNewPrompt', {
+      `${this.backendURL}/sendNewPrompt`, {
         message,
       }
     );
@@ -21,7 +22,7 @@ export class OpenaiService {
 
   initializeBot():Observable<Message> {
     return this.httpClient.get<Message>(
-      'http://localhost:3000/initBot'
+      `${this.backendURL}/initBot`
     )
   }
 }
