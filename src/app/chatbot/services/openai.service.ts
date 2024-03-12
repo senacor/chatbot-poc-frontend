@@ -18,4 +18,10 @@ export class OpenaiService {
       }
     );
   }
+
+  initializeBot():Observable<Message> {
+    return this.httpClient.get<Message>(
+      'http://localhost:3000/initBot'
+    )
+  }
 }
