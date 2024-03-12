@@ -1,0 +1,7 @@
+<div [ngClass]="message.role === 'user' ? 'user-container' : 'bot-container'">
+    <mat-card [ngClass]="message.role === 'user' ? 'user' : 'bot'">
+        <mat-card-content>
+            {{message.content}}
+        </mat-card-content>
+    </mat-card>
+</div>

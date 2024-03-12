@@ -1,0 +1,6 @@
+services:
+  openai-chatbot-frontend:
+    build:
+      context: .
+    ports:
+      - 4200:80

@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="message-container">
+        <div class="message-box" #chatbox>
+            @for (message of messages; track $index) {
+                <app-message-card [message]="message" [ngClass]="message.role === 'user' ? 'user' : 'bot'"></app-message-card>
+            }
+        </div> 
+    </div>
+    <div class="footer">
+        <app-input-field (userInputEvent)="sendNewMessage($event)"></app-input-field>
+    </div>
+</div>
+
