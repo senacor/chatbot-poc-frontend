@@ -2,5 +2,8 @@ services:
   openai-chatbot-frontend:
     build:
       context: .
+      dockerfile: Dockerfile
+      args: 
+        PROFILE: development 
     ports:
-      - 4200:80
+      - 4200:8080
