@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class OpenaiService {
 
-  readonly backendURL = process.env['BACKEND_SERVICE_URL'] || "http://localhost:3000";
+  //TODO: Dynamically load the backendUrl instead of hardcoding it
+  readonly backendURL = "https://chatbot-backend-csf37hag2a-ey.a.run.app" || "http://localhost:3000";
 
   constructor(private readonly httpClient: HttpClient) { }
   
