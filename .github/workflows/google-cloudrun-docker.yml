@@ -54,7 +54,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/chatbot/${{ env.SERVICE }}:${{ github.sha }}" ./
+          docker build -t --build-arg="PROFILE=production" "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/chatbot/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/chatbot/${{ env.SERVICE }}:${{ github.sha }}"
 
       # END - Docker auth and build
