@@ -18,25 +18,20 @@ import { take  } from 'rxjs';
   styleUrl: './chatbox.component.scss',
 })
 export class ChatboxComponent {
-  testing = false;
+  testing = true;
 
   messages: Message[] = [];
 
   constructor(private readonly openaiService: OpenaiService){
-    if(!this.testing){
-      this.openaiService.sendMessage({
-        content: "Hallo du bist ein Banker.",
-        role: "system"
-      }).pipe(take(1)).subscribe({
-        next: response => {
-          this.messages.push(response);
-        }
-      });
-    }
-    else{
+    if(this.testing){
       this.messages.push({
         role: "system",
         content: "Hallo!"
+      })
+    }
+    else{
+      this.openaiService.initializeBot().pipe(take(1)).subscribe({
+        next: message => this.messages.push(message)
       })
     }
     
@@ -49,7 +44,7 @@ export class ChatboxComponent {
     };
     this.messages.push(message);
     if(!this.testing){
-      this.openaiService.sendMessage(message)
+      this.openaiService.sendMessage(this.messages)
       .pipe(take(1))
       .subscribe({
         next: response => {
