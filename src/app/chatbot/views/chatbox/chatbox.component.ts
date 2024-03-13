@@ -18,22 +18,13 @@ import { take  } from 'rxjs';
   styleUrl: './chatbox.component.scss',
 })
 export class ChatboxComponent {
-  testing = true;
 
   messages: Message[] = [];
 
   constructor(private readonly openaiService: OpenaiService){
-    if(this.testing){
-      this.messages.push({
-        role: "system",
-        content: "Hallo!"
-      })
-    }
-    else{
       this.openaiService.initializeBot().pipe(take(1)).subscribe({
         next: message => this.messages.push(message)
       })
-    }
     
   }
 
@@ -43,21 +34,12 @@ export class ChatboxComponent {
       role: "user"
     };
     this.messages.push(message);
-    if(!this.testing){
-      this.openaiService.sendMessage(this.messages)
-      .pipe(take(1))
-      .subscribe({
-        next: response => {
-          this.messages.push(response);
-        }
-      });
-    }
-    else{
-      this.messages.push({
-        role: 'bot',
-        content: 'Test Message'
-      })
-    }
-    
+    this.openaiService.sendMessage(this.messages)
+    .pipe(take(1))
+    .subscribe({
+      next: response => {
+        this.messages.push(response);
+      }
+    });
   }
 }
