@@ -22,8 +22,8 @@ export class OpenaiService {
     );
   }
 
-  initializeBot():Observable<Message> {
-    return this.httpClient.get<Message>(
+  initializeBot():Observable<Message[]> {
+    return this.httpClient.get<Message[]>(
       `${environment.backendOrigin}/chat/init`
     )
   }

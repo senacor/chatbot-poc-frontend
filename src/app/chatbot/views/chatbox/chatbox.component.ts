@@ -23,7 +23,7 @@ export class ChatboxComponent {
 
   constructor(private readonly openaiService: OpenaiService){
       this.openaiService.initializeBot().pipe(take(1)).subscribe({
-        next: message => this.messages.push(message)
+        next: messages => this.messages = messages
       })
     
   }
