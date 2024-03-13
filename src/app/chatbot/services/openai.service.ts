@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Message } from '../models/message';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { setAuthHeaders } from '../../../utils/auth/auth-headers';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class OpenaiService {
   constructor(private readonly httpClient: HttpClient) { }
   
   sendMessage(message:Message):Observable<Message> {
+    const serviceRequestConfig = setAuthHeaders(this.backendURL, "POST", message);
     return this.httpClient.post<Message>(
       `${this.backendURL}/sendNewPrompt`, {
         message,
@@ -22,6 +24,7 @@ export class OpenaiService {
   }
 
   initializeBot():Observable<Message> {
+    const serviceRequestConfig = setAuthHeaders(this.backendURL, "GET");
     return this.httpClient.get<Message>(
       `${this.backendURL}/initBot`
     )
