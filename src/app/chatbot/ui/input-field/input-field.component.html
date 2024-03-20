@@ -1,0 +1,17 @@
+<div class="container">
+    <form>
+        <mat-form-field>
+            <input 
+                matInput type="text" 
+                placeholder="Send a message ..." 
+                [(ngModel)]="userInput" 
+                [ngModelOptions]="{standalone: true}"
+                (keyup.enter)="sendNewPrompt()"
+                >
+        </mat-form-field>
+    </form>
+    <button mat-flat-button color="primary" (click)="sendNewPrompt()">Send</button>
+</div>
+
+
+
