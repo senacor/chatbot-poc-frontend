@@ -1,10 +1,14 @@
-<div class="message-container">
-    <div class="message-box" #chatbox [scrollTop]="chatbox.scrollHeight">
-        @for (message of messages | slice:1; track $index) {
-            <app-message-card [message]="message" [ngClass]="message.role === 'user' ? 'user' : 'bot'"></app-message-card>
+<div class="w-full flex flex-col justify-center items-center h-full pt-2">
+    <div
+        #chatbox
+        class="bg-accent h-full w-7/12 rounded-md overflow-y-scroll"
+        >
+        <!--First 2 messages are prompt context-->
+        @for (message of messages | slice:2; track $index) {
+            <app-message-card [message]="message"></app-message-card>
         }
     </div> 
-    <app-input-field (userInputEvent)="sendNewMessage($event)"></app-input-field>
+    <app-input-field (userInputEvent)="sendNewMessage($event)" class="w-7/12"/>
 </div>
 
 

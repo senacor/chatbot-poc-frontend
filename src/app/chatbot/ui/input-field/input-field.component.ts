@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
   standalone: true,
   imports: [
-    MatInputModule,
     FormsModule,
-    MatButtonModule,
   ],
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss'
@@ -21,6 +17,7 @@ export class InputFieldComponent {
   @Output() userInputEvent = new EventEmitter<string>();
 
   sendNewPrompt(){
+    console.log(this.userInput);
     this.userInputEvent.emit(this.userInput);
     this.clearUserInput();
   }
