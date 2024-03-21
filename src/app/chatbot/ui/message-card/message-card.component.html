@@ -6,9 +6,9 @@
     </div>
 }
 @else {
-    <div class="chat chat-end w-full">
+    <div class="chat chat-end">
         <div class="chat-bubble chat-bubble-info">
-            {{message.content}}
+            <p [innerHTML]="message.content | boldText">
         </div>
     </div>  
 }

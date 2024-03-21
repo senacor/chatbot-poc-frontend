@@ -1,7 +1,7 @@
 <div class="w-full flex flex-col justify-center items-center h-full pt-2">
     <div
         #chatbox
-        class="bg-accent h-full w-7/12 rounded-md overflow-y-scroll"
+        class="bg-accent h-full w-7/12 rounded-md"
         >
         <!--First 2 messages are prompt context-->
         @for (message of messages | slice:2; track $index) {
