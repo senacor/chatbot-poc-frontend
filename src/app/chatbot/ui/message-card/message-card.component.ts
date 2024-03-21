@@ -9,7 +9,7 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   imports: [
     MatCardModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './message-card.component.html',
   styleUrl: './message-card.component.scss'

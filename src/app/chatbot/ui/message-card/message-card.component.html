@@ -1,6 +1,6 @@
 <div [ngClass]="message.role === 'user' ? 'user-container' : 'bot-container'">
     <mat-card [ngClass]="message.role === 'user' ? 'user' : 'bot'">
-        <mat-card-content>
+        <mat-card-content style="white-space: break-spaces;">
             {{message.content}}
         </mat-card-content>
     </mat-card>
