@@ -25,9 +25,9 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@chatbot/*": ["src/app/chatbot/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@assets/*": ["src/app/assets/*"],
+      "shared": ["/app/shared/*"],
+      "chatbot": ["/app/chatbot/*"],
+      "assets": ["/app/assets/*"]
     }
   },
   "angularCompilerOptions": {
