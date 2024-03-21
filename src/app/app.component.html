@@ -1,3 +1,40 @@
-<app-chatbox/>
-
+<div class="h-screen flex flex-col">
+    <header class="drawer h-full">
+        <input id="drawer-toggle" type="checkbox" class="drawer-toggle">
+        <div class="drawer-content flex flex-col">  
+            <div class="navbar w-full bg-base-300 border-solid flex flex-row gap-3 border-b-1 border-qonto-border">
+                <div>
+                    <label for="drawer-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </label>
+                </div>
+                <div class="flex--none lg:block">
+                    <!--Navbar menu content-->
+                    <a>
+                        <img 
+                            src="../assets/qonto_logo.png" 
+                            alt="Qonto"
+                            class="max-h-10 min-h-3"    
+                        >
+                    </a>
+                </div>
+            </div>
+            <div class="h-full flex-1">
+                <!--Page content-->
+                <app-chatbox/>
+            </div>
+            <div>
+                <app-footer/>
+            </div>
+        </div>
+        <div class="drawer-side">
+            <label for="drawer-toggle" aria-label="close sidebar" class="drawer-overlay"></label> 
+            <ul class="menu p-4 w-80 min-h-full bg-base-200">
+              <!-- Sidebar content here -->
+            </ul>
+        </div>
+    </header>
+</div>
 <router-outlet/>
+
+

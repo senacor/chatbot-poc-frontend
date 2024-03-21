@@ -1,7 +1,14 @@
-<div [ngClass]="message.role === 'user' ? 'user-container' : 'bot-container'">
-    <mat-card [ngClass]="message.role === 'user' ? 'user' : 'bot'">
-        <mat-card-content style="white-space: break-spaces;">
+@if (message.role !== 'user') {
+    <div class="chat chat-start">
+        <div class="chat-bubble chat-bubble-primary break-words max-w-md whitespace-break-spaces">
             {{message.content}}
-        </mat-card-content>
-    </mat-card>
-</div>
+        </div>
+    </div>
+}
+@else {
+    <div class="chat chat-end">
+        <div class="chat-bubble chat-bubble-info break-words max-w-md whitespace-break-spaces">
+            {{message.content}}
+        </div>
+    </div>  
+}

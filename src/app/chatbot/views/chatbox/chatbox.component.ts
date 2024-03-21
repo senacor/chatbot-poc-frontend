@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnChanges, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { Message } from '../../models/message';
 import { MessageCardComponent } from '../../ui/message-card/message-card.component';
 import { CommonModule } from "@angular/common";
@@ -16,8 +16,11 @@ import { take  } from 'rxjs';
   ],
   templateUrl: './chatbox.component.html',
   styleUrl: './chatbox.component.scss',
+  
 })
-export class ChatboxComponent {
+export class ChatboxComponent implements AfterViewInit	 {
+  @ViewChild('chatbox', { static: true })
+  chatBox!: ElementRef;
 
   messages: Message[] = [];
 
@@ -26,6 +29,9 @@ export class ChatboxComponent {
         next: messages => this.messages = messages
       })
     
+  }
+  ngAfterViewInit(): void {
+    this.chatBox.nativeElement.scrollBottom = this.chatBox.nativeElement.scrollHeight;
   }
 
   sendNewMessage(input:string){
