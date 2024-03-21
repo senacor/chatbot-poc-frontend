@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Message } from '../../models/message';
 import { CommonModule } from "@angular/common";
-import { BoldTextPipe } from 'app/shared/pipes/bold-text.pipe';
 
 
 @Component({
@@ -9,7 +8,6 @@ import { BoldTextPipe } from 'app/shared/pipes/bold-text.pipe';
   standalone: true,
   imports: [
     CommonModule,
-    BoldTextPipe,
   ],
   templateUrl: './message-card.component.html',
   styleUrl: './message-card.component.scss'
