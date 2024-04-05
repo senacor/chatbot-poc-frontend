@@ -5,18 +5,21 @@ import { CommonModule } from "@angular/common";
 import { InputFieldComponent } from '../../ui/input-field/input-field.component';
 import { OpenaiService } from '../../services/openai.service';
 import { take  } from 'rxjs';
+import { VisibleMessagesPipe } from "../../pipes/visible-messages.pipe";
+import { MessageLoaderComponent } from 'app/chatbot/ui/message-loader/message-loader.component';
 
 @Component({
-  selector: 'app-chatbox',
-  standalone: true,
-  imports: [
-    MessageCardComponent,
-    InputFieldComponent,
-    CommonModule
-  ],
-  templateUrl: './chatbox.component.html',
-  styleUrl: './chatbox.component.scss',
-  
+    selector: 'app-chatbox',
+    standalone: true,
+    templateUrl: './chatbox.component.html',
+    styleUrl: './chatbox.component.scss',
+    imports: [
+        MessageCardComponent,
+        InputFieldComponent,
+        CommonModule,
+        VisibleMessagesPipe,
+        MessageLoaderComponent,
+    ]
 })
 export class ChatboxComponent implements AfterViewInit	 {
   @ViewChild('chatbox', { static: true })
@@ -24,17 +27,26 @@ export class ChatboxComponent implements AfterViewInit	 {
 
   messages: Message[] = [];
 
+  isLoading: boolean = false;
+
   constructor(private readonly openaiService: OpenaiService){
-      this.openaiService.initializeBot().pipe(take(1)).subscribe({
-        next: messages => this.messages = messages
-      })
-    
   }
+
+  ngOnInit() {
+    this.isLoading = true;
+    this.openaiService.initializeBot().pipe(take(1)).subscribe({
+      next: messages => {
+        this.messages = messages;
+        this.isLoading = false;
+      }
+    })
+  }
+
   ngAfterViewInit(): void {
-    this.chatBox.nativeElement.scrollBottom = this.chatBox.nativeElement.scrollHeight;
   }
 
   sendNewMessage(input:string){
+    this.isLoading = true;
     const message = {
       content: input,
       role: "user"
@@ -45,6 +57,7 @@ export class ChatboxComponent implements AfterViewInit	 {
     .subscribe({
       next: response => {
         this.messages.push(response);
+        this.isLoading = false;
       }
     });
   }

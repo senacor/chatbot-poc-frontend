@@ -1,11 +1,13 @@
 <div class="flex flex-row gap-3 py-3 w-full">
-    <input 
+    <input
+        #messageInput
+        autofocus
         type="text"
-        placeholder="Send a message"
+        [placeholder]="_isDisabled ? 'Bitte warten Sie auf meine Nachricht...': 'Eine Nachricht schicken. Drücken Sie zum Senden die Eingabetaste.'"
         [(ngModel)]="userInput"
         (keyup.enter)="sendNewPrompt()" 
         class="input input-bordered input-md w-full bg-base-300" />
-    <button class="btn btn-accent btn-md ml-auto" (click)="sendNewPrompt()">Send</button>
+    <button [disabled]="_isDisabled ? 'disabled' : false" class="btn btn-accent btn-md ml-auto" (click)="sendNewPrompt()">Schicken</button>
 </div>
 
 

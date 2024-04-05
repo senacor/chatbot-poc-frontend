@@ -16,8 +16,17 @@ export class InputFieldComponent {
 
   @Output() userInputEvent = new EventEmitter<string>();
 
+  _isDisabled: boolean = false;
+
+  @Input()
+  set isDisabled(value: boolean) {
+    this._isDisabled = value;
+  }
+
   sendNewPrompt(){
-    console.log(this.userInput);
+    if (this._isDisabled) {
+      return;
+    }
     this.userInputEvent.emit(this.userInput);
     this.clearUserInput();
   }

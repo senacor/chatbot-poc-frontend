@@ -1,14 +1,17 @@
-<div class="w-full flex flex-col justify-center items-center h-full pt-2">
+<div class="w-full flex flex-col justify-center items-center h-full max-h-full pt-2">
     <div
         #chatbox
-        class="bg-accent h-full w-7/12 rounded-md"
+        class="flex flex-col-reverse bg-accent h-[75vh] max-h-[75vh] overflow-scroll w-7/12 rounded-md"
         >
-        <!--First 2 messages are prompt context-->
-        @for (message of messages | slice:2; track $index) {
-            <app-message-card [message]="message"></app-message-card>
-        }
+            <div>
+                <!--Show only message from assistant or user-->
+                @for (message of messages | visibleMessages; track $index) {
+                    <app-message-card [message]="message"></app-message-card>
+                }
+                <app-message-loader *ngIf="isLoading"></app-message-loader>
+            </div>
     </div> 
-    <app-input-field (userInputEvent)="sendNewMessage($event)" class="w-7/12"/>
+    <app-input-field [isDisabled]="isLoading" (userInputEvent)="sendNewMessage($event)" class="w-7/12"/>
 </div>
 
 
