@@ -38,6 +38,13 @@ export class ChatboxComponent implements AfterViewInit	 {
       next: messages => {
         this.messages = messages;
         this.isLoading = false;
+      },
+      error: error => {
+        console.error(error);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     })
   }
@@ -57,6 +64,13 @@ export class ChatboxComponent implements AfterViewInit	 {
     .subscribe({
       next: response => {
         this.messages.push(response);
+        this.isLoading = false;
+      },
+      error: error => {
+        console.error(error);
+        this.isLoading = false;
+      },
+      complete: () => {
         this.isLoading = false;
       }
     });
