@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 interface fileUploadResponse {
   content?: string,
