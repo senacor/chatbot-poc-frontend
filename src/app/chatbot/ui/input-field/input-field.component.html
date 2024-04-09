@@ -1,4 +1,4 @@
-<div class="flex flex-row gap-3 py-3 w-full">
+    <div class="flex flex-row gap-3 py-3 w-full">
     <input
         #messageInput
         autofocus
@@ -6,8 +6,20 @@
         [placeholder]="_isDisabled ? 'Bitte warten Sie auf meine Nachricht...': 'Eine Nachricht schicken. Drücken Sie zum Senden die Eingabetaste.'"
         [(ngModel)]="userInput"
         (keyup.enter)="sendNewPrompt()" 
-        class="input input-bordered input-md w-full bg-base-300" />
-    <button [disabled]="_isDisabled ? 'disabled' : false" class="btn btn-accent btn-md ml-auto" (click)="sendNewPrompt()">Schicken</button>
+        class="input input-bordered input-md w-5/6 bg-base-300"
+    />
+    <button 
+        [disabled]="_isDisabled ? 'disabled' : false" 
+        class="w-1/12 btn btn-accent btn-md ml-auto" 
+        (click)="sendNewPrompt()">
+            Schicken
+    </button>
+    <div
+        class="w-1/12"
+    >
+        <app-input-file-upload (userInputEvent)="userInputEvent.emit($event)"></app-input-file-upload>
+    </div>
+    
 </div>
 
 

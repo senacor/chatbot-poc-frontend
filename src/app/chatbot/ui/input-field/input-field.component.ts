@@ -1,14 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { InputFileUploadComponent } from "../input-file-upload/input-file-upload.component.js";
 
 @Component({
-  selector: 'app-input-field',
-  standalone: true,
-  imports: [
-    FormsModule,
-  ],
-  templateUrl: './input-field.component.html',
-  styleUrl: './input-field.component.scss'
+    selector: 'app-input-field',
+    standalone: true,
+    templateUrl: './input-field.component.html',
+    styleUrl: './input-field.component.scss',
+    imports: [
+        FormsModule,
+        InputFileUploadComponent,
+    ]
 })
 export class InputFieldComponent {
   

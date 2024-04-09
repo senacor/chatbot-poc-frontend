@@ -1,0 +1,12 @@
+<label
+    for="file_input"
+    class="w-full btn btn-accent btn-md ml-auto">
+        Datei hochladen
+</label>
+<input 
+    class="hidden"
+    id="file_input" 
+    type="file"
+    accept=".doc,.docx,.txt"
+    (change)="onFileInputChange($event)"
+/>
