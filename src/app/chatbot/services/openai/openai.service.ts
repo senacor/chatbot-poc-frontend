@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Message } from '../models/message';
+import { Message } from '../../models/message';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
@@ -13,10 +13,10 @@ export class OpenaiService {
 
   constructor(private readonly httpClient: HttpClient) { }
   
-  sendMessage(messages:Message[]):Observable<Message> {
-    return this.httpClient.post<Message>(
+  sendMessage(message:Message):Observable<Message[]> {
+    return this.httpClient.post<Message[]>(
       `${environment.backendOrigin}/chat/newMessage`, {
-        messages,
+        ...message,
       }
     );
   }
