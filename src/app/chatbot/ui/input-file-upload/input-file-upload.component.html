@@ -13,5 +13,5 @@
             <p class="mb-2 text-sm">Hochladen einer Datei mit dem Namen {{filename}}...</p>
         </div>
     </div>
-    <input id="dropzone-file" type="file" class="hidden" accept=".doc,.docx,.txt" (change)="onFileInputChange($event)"/>
+    <input [disabled]="isUploading" id="dropzone-file" type="file" class="hidden" accept=".doc,.docx,.txt" (change)="onFileInputChange($event)"/>
 </label>

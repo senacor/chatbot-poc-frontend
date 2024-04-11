@@ -40,11 +40,18 @@ export class InputFileUploadComponent {
     const formData = new FormData();
     formData.append('file', file);
     this.httpClient.post(`${environment.backendOrigin}/chat/fileUpload`, formData)
-      .subscribe((r: fileUploadResponse) => {
+      .subscribe({
+        next: (r: fileUploadResponse) => {
         this.markFileProvided.emit(true);
         this.isUploading = false;
         this.filename = '';
-  });
+      },
+      error: (e) => {
+        console.error(e);
+        this.isUploading = false;
+        this.filename = '';
+      }
+    })
   }
 
 }
