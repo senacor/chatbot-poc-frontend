@@ -3,7 +3,7 @@ import { Message } from '../../models/message';
 import { MessageCardComponent } from '../../ui/message-card/message-card.component';
 import { CommonModule } from "@angular/common";
 import { InputFieldComponent } from '../../ui/input-field/input-field.component';
-import { OpenaiService } from '../../services/openai.service';
+import { OpenaiService } from '../../services/openai/openai.service';
 import { take  } from 'rxjs';
 import { VisibleMessagesPipe } from "../../pipes/visible-messages.pipe";
 import { MessageLoaderComponent } from 'app/chatbot/ui/message-loader/message-loader.component';
@@ -59,11 +59,11 @@ export class ChatboxComponent implements AfterViewInit	 {
       role: "user"
     };
     this.messages.push(message);
-    this.openaiService.sendMessage(this.messages)
+    this.openaiService.sendMessage(message)
     .pipe(take(1))
     .subscribe({
       next: response => {
-        this.messages.push(response);
+        this.messages = response;
         this.isLoading = false;
       },
       error: error => {
