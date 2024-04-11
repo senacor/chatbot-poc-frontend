@@ -1,5 +1,5 @@
-<div class="w-full h-full max-h-full flex flex-col justify-center items-center pt-2">
-    <div *ngIf="isFileProvided">
+<div>
+    <div *ngIf="isFileProvided" class="w-full flex flex-col justify-center items-center h-full max-h-full pt-2">
         <div
             #chatbox
             class="flex flex-col-reverse bg-accent h-[75vh] max-h-[75vh] overflow-auto w-7/12 rounded-md"
@@ -14,8 +14,9 @@
         </div> 
         <app-input-field [isDisabled]="isLoading" (userInputEvent)="sendNewMessage($event)" class="w-7/12"/>
     </div>
-    <app-input-file-upload *ngIf="!isFileProvided"></app-input-file-upload>
-
+    <div *ngIf="!isFileProvided" class="w-full flex flex-col justify-center items-center h-[75vh] pt-2">
+        <app-input-file-upload (markFileProvided)="markFileProvided($event)"></app-input-file-upload>
+    </div>
 </div>
 
 

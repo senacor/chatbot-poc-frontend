@@ -33,10 +33,10 @@ export class ChatboxComponent implements AfterViewInit	 {
 
   isFileProvided: boolean = false;
 
-  constructor(private readonly openaiService: OpenaiService){
-  }
+  constructor(private readonly openaiService: OpenaiService) {}
 
-  ngOnInit() {
+  markFileProvided = (event: boolean) => {
+    this.isFileProvided = true;
     this.isLoading = true;
     this.openaiService.initializeBot().pipe(take(1)).subscribe({
       next: messages => {
