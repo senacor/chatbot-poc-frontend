@@ -20,6 +20,8 @@ export class InputFileUploadComponent {
 
   @Output() userInputEvent = new EventEmitter<string>();
 
+  isDisabled: boolean = false;
+
   onFileInputChange(event: Event) {
     if (!(event?.target instanceof HTMLInputElement)) {
       return;

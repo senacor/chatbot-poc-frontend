@@ -7,6 +7,7 @@ import { OpenaiService } from '../../services/openai/openai.service';
 import { take  } from 'rxjs';
 import { VisibleMessagesPipe } from "../../pipes/visible-messages.pipe";
 import { MessageLoaderComponent } from 'app/chatbot/ui/message-loader/message-loader.component';
+import { InputFileUploadComponent } from "../../ui/input-file-upload/input-file-upload.component";
 
 @Component({
     selector: 'app-chatbox',
@@ -19,6 +20,7 @@ import { MessageLoaderComponent } from 'app/chatbot/ui/message-loader/message-lo
         CommonModule,
         VisibleMessagesPipe,
         MessageLoaderComponent,
+        InputFileUploadComponent,
     ]
 })
 export class ChatboxComponent implements AfterViewInit	 {
@@ -28,6 +30,8 @@ export class ChatboxComponent implements AfterViewInit	 {
   messages: Message[] = [];
 
   isLoading: boolean = false;
+
+  isFileProvided: boolean = false;
 
   constructor(private readonly openaiService: OpenaiService){
   }
