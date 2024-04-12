@@ -7,11 +7,11 @@
         </div>
         <div class="text-center" *ngIf="!isUploading">
             <p class="mb-2 text-sm">Klicken Sie zum Hochladen oder ziehen Sie es per Drag & Drop</p>
-            <p class="text-xs">TXT, DOC, DOCX</p>
+            <p class="text-xs">TXT oder DOCX</p>
         </div>
         <div class="text-center" *ngIf="isUploading && filename">
             <p class="mb-2 text-sm">Hochladen einer Datei mit dem Namen {{filename}}...</p>
         </div>
     </div>
-    <input [disabled]="isUploading" id="dropzone-file" type="file" class="hidden" accept=".doc,.docx,.txt" (change)="onFileInputChange($event)"/>
+    <input [disabled]="isUploading" id="dropzone-file" type="file" class="hidden" accept=".docx,.txt" (change)="onFileInputChange($event)"/>
 </label>

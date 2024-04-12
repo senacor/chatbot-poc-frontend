@@ -15,7 +15,7 @@
         <app-input-field [isDisabled]="isLoading" (userInputEvent)="sendNewMessage($event)" class="w-7/12"/>
     </div>
     <div *ngIf="!isFileProvided" class="w-full flex flex-col justify-center items-center h-[75vh] pt-2">
-        <app-input-file-upload (markFileProvided)="markFileProvided($event)"></app-input-file-upload>
+        <app-input-file-upload (updateMessages)="updateMessages($event)" (markFileProvided)="markFileProvided($event)"></app-input-file-upload>
     </div>
 </div>
 

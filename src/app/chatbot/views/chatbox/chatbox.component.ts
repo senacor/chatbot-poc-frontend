@@ -35,22 +35,12 @@ export class ChatboxComponent implements AfterViewInit	 {
 
   constructor(private readonly openaiService: OpenaiService) {}
 
-  markFileProvided = (event: boolean) => {
-    this.isFileProvided = true;
-    this.isLoading = true;
-    this.openaiService.initializeBot().pipe(take(1)).subscribe({
-      next: messages => {
-        this.messages = messages;
-        this.isLoading = false;
-      },
-      error: error => {
-        console.error(error);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
+  updateMessages = (messages: Message[]) => {
+    this.messages = messages;
+  }
+
+  markFileProvided = (isFileProvided: boolean) => {
+    this.isFileProvided = isFileProvided;
   }
 
   ngAfterViewInit(): void {

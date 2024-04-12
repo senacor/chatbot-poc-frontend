@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Message } from 'app/chatbot/models/message';
 import { environment } from 'environments/environment';
-
-interface fileUploadResponse {
-  content?: string,
-  name?: string,
-}
 
 @Component({
   selector: 'app-input-file-upload',
@@ -21,6 +17,7 @@ export class InputFileUploadComponent {
 
   constructor(private httpClient: HttpClient) {}
 
+  @Output() updateMessages = new EventEmitter<Message[]>();
   @Output() markFileProvided = new EventEmitter<boolean>();
 
   isDisabled: boolean = false;
@@ -39,15 +36,17 @@ export class InputFileUploadComponent {
     this.filename = file.name;
     const formData = new FormData();
     formData.append('file', file);
-    this.httpClient.post(`${environment.backendOrigin}/chat/fileUpload`, formData)
+    this.httpClient.post<Message[]>(`${environment.backendOrigin}/chat/fileUpload`, formData)
       .subscribe({
-        next: (r: fileUploadResponse) => {
+        next: (messages: Message[]) => {
+        this.updateMessages.emit(messages);
         this.markFileProvided.emit(true);
         this.isUploading = false;
         this.filename = '';
       },
       error: (e) => {
         console.error(e);
+        alert(e.error ?? 'Fehler');
         this.isUploading = false;
         this.filename = '';
       }
