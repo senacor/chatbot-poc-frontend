@@ -63,6 +63,10 @@ export class ChatboxComponent implements AfterViewInit	 {
       error: error => {
         console.error(error);
         this.isLoading = false;
+        if (error?.status === 404) {
+          this.markFileProvided(false);
+          this.updateMessages([]);
+        }
       },
       complete: () => {
         this.isLoading = false;
