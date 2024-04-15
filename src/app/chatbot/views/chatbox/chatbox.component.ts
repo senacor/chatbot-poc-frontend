@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnChanges, QueryList, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { Message } from '../../models/message';
 import { MessageCardComponent } from '../../ui/message-card/message-card.component';
 import { CommonModule } from "@angular/common";
@@ -33,6 +33,10 @@ export class ChatboxComponent implements AfterViewInit	 {
 
   isFileProvided: boolean = false;
 
+  @Input() useLegacyPrompt: boolean = false;
+  @Output() markFileProvidedEvent = new EventEmitter<boolean>();
+
+
   constructor(private readonly openaiService: OpenaiService) {}
 
   updateMessages = (messages: Message[]) => {
@@ -41,6 +45,7 @@ export class ChatboxComponent implements AfterViewInit	 {
 
   markFileProvided = (isFileProvided: boolean) => {
     this.isFileProvided = isFileProvided;
+    this.markFileProvidedEvent.emit(isFileProvided);
   }
 
   ngAfterViewInit(): void {

@@ -17,7 +17,7 @@
             </div>
             <div class="h-full max-h-full flex-1">
                 <!--Page content-->
-                <app-chatbox/>
+                <app-chatbox [useLegacyPrompt]="useLegacyPrompt" (markFileProvidedEvent)="markFileProvided($event)"/>
             </div>
             <div>
                 <app-footer/>
@@ -26,6 +26,16 @@
         <div class="drawer-side">
             <label for="drawer-toggle" aria-label="close sidebar" class="drawer-overlay"></label> 
             <ul class="menu p-4 w-80 min-h-full bg-base-200">
+                <li class="flex flex-row" *ngIf="isFileProvided == false">
+                    <label for="enable-legacy-prompt-checkbox">
+                        Legacy-Eingabeaufforderung
+                    </label>
+                    <input
+                        id="enable-legacy-prompt-checkbox" 
+                        type="checkbox"
+                        [(ngModel)]="useLegacyPrompt"
+                    />
+                </li>
               <!-- Sidebar content here -->
             </ul>
         </div>

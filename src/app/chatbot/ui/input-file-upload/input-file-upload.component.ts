@@ -20,6 +20,8 @@ export class InputFileUploadComponent {
   @Output() updateMessages = new EventEmitter<Message[]>();
   @Output() markFileProvided = new EventEmitter<boolean>();
 
+  @Input() useLegacyPrompt: boolean = false;
+
   isDisabled: boolean = false;
   isUploading: boolean = false;
   filename: string = '';
@@ -36,7 +38,7 @@ export class InputFileUploadComponent {
     this.filename = file.name;
     const formData = new FormData();
     formData.append('file', file);
-    this.httpClient.post<Message[]>(`${environment.backendOrigin}/chat/fileUpload`, formData)
+    this.httpClient.post<Message[]>(`${environment.backendOrigin}/chat/fileUpload?useLegacyPrompt=${this.useLegacyPrompt}`, formData)
       .subscribe({
         next: (messages: Message[]) => {
         this.updateMessages.emit(messages);
