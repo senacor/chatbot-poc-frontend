@@ -21,7 +21,7 @@ import { MessageLoaderComponent } from 'app/chatbot/ui/message-loader/message-lo
         MessageLoaderComponent,
     ]
 })
-export class ChatboxComponent implements AfterViewInit	 {
+export class ChatboxComponent	 {
   @ViewChild('chatbox', { static: true })
   chatBox!: ElementRef;
 
@@ -33,6 +33,10 @@ export class ChatboxComponent implements AfterViewInit	 {
   }
 
   ngOnInit() {
+   this.initialize();
+  }
+
+  initialize() {
     this.isLoading = true;
     this.openaiService.initializeBot().pipe(take(1)).subscribe({
       next: messages => {
@@ -47,9 +51,6 @@ export class ChatboxComponent implements AfterViewInit	 {
         this.isLoading = false;
       }
     })
-  }
-
-  ngAfterViewInit(): void {
   }
 
   sendNewMessage(input:string){
@@ -69,6 +70,9 @@ export class ChatboxComponent implements AfterViewInit	 {
       error: error => {
         console.error(error);
         this.isLoading = false;
+        if (error?.status === 404) {
+          this.initialize();
+        }
       },
       complete: () => {
         this.isLoading = false;
